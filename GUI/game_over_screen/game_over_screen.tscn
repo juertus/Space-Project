@@ -1,0 +1,167 @@
+[gd_scene load_steps=9 format=3 uid="uid://bsdwhajbpw4o0"]
+
+[ext_resource type="Script" path="res://GUI/game_over_screen/game_over_screen.gd" id="1_0e1s5"]
+[ext_resource type="FontFile" uid="uid://c0x5hrl2ups2v" path="res://assets/fonts/nokiafc22.ttf" id="2_egw4w"]
+[ext_resource type="StyleBox" uid="uid://p2i7d4crnty5" path="res://assets/tres/default_box.tres" id="3_gj4lr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qdqud"]
+bg_color = Color(0.607843, 0.780392, 0, 1)
+border_width_left = 15
+border_width_top = 15
+border_width_right = 15
+border_width_bottom = 15
+border_color = Color(0.101961, 0.0980392, 0.0784314, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="LabelSettings" id="LabelSettings_caa62"]
+font = ExtResource("2_egw4w")
+font_size = 120
+font_color = Color(0.101961, 0.0980392, 0.0784314, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_eqka0"]
+font = ExtResource("2_egw4w")
+font_size = 75
+font_color = Color(0.101961, 0.0980392, 0.0784314, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_7sulj"]
+font = ExtResource("2_egw4w")
+font_size = 75
+font_color = Color(0.101961, 0.0980392, 0.0784314, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aqrib"]
+bg_color = Color(0.607843, 0.780392, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.101961, 0.0980392, 0.0784314, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[node name="GameOverScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0e1s5")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.607843, 0.780392, 0, 1)
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -587.0
+offset_top = -277.0
+offset_right = 593.0
+offset_bottom = 293.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_qdqud")
+
+[node name="GameOver" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 8.0
+offset_top = 33.0
+offset_right = 8.0
+offset_bottom = 186.0
+grow_horizontal = 2
+text = "GAME OVER!"
+label_settings = SubResource("LabelSettings_caa62")
+horizontal_alignment = 1
+
+[node name="HighScore" type="Label" parent="Panel"]
+layout_mode = 2
+offset_left = 99.0
+offset_top = 201.0
+offset_right = 920.0
+offset_bottom = 311.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "High Score:"
+label_settings = SubResource("LabelSettings_eqka0")
+
+[node name="Score" type="Label" parent="Panel"]
+layout_mode = 2
+offset_left = 325.0
+offset_top = 297.0
+offset_right = 1188.0
+offset_bottom = 407.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Score:"
+label_settings = SubResource("LabelSettings_7sulj")
+
+[node name="TryAgain" type="Panel" parent="Panel"]
+layout_mode = 0
+offset_left = 98.0
+offset_top = 419.0
+offset_right = 560.0
+offset_bottom = 536.0
+theme_override_styles/panel = ExtResource("3_gj4lr")
+
+[node name="Button" type="Button" parent="Panel/TryAgain"]
+layout_mode = 0
+offset_left = 1.0
+offset_right = 463.0
+offset_bottom = 116.0
+theme_override_colors/font_color = Color(0.101961, 0.0980392, 0.0784314, 1)
+theme_override_colors/font_pressed_color = Color(0.101961, 0.0980392, 0.0784314, 1)
+theme_override_colors/font_hover_color = Color(0.101961, 0.0980392, 0.0784314, 1)
+theme_override_fonts/font = ExtResource("2_egw4w")
+theme_override_font_sizes/font_size = 60
+text = "Try Again"
+flat = true
+icon_alignment = 1
+
+[node name="MainMenu" type="Panel" parent="Panel"]
+layout_mode = 0
+offset_left = 634.0
+offset_top = 418.0
+offset_right = 1096.0
+offset_bottom = 530.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_aqrib")
+
+[node name="Button" type="Button" parent="Panel/MainMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -222.0
+offset_top = -54.0
+offset_right = 222.0
+offset_bottom = 54.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.101961, 0.0980392, 0.0784314, 1)
+theme_override_colors/font_pressed_color = Color(0.101961, 0.0980392, 0.0784314, 1)
+theme_override_colors/font_hover_color = Color(0.101961, 0.0980392, 0.0784314, 1)
+theme_override_fonts/font = ExtResource("2_egw4w")
+theme_override_font_sizes/font_size = 60
+action_mode = 0
+text = "Main Menu"
+flat = true
+
+[connection signal="pressed" from="Panel/TryAgain/Button" to="." method="_on_try_again_pressed"]
+[connection signal="pressed" from="Panel/MainMenu/Button" to="." method="_on_main_menu_pressed"]

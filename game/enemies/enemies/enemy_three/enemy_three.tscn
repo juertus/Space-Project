@@ -1,0 +1,60 @@
+[gd_scene load_steps=8 format=3 uid="uid://d2hh3hpcmhfwf"]
+
+[ext_resource type="Script" path="res://game/enemies/enemies/enemy_three/enemy_three.gd" id="1_abrsf"]
+[ext_resource type="Texture2D" uid="uid://dk71pr67nwhwf" path="res://assets/sprites/sprite_sheet.png" id="2_diw1u"]
+[ext_resource type="AudioStream" uid="uid://7yihr3umpbtc" path="res://assets/sounds/hitHurt.wav" id="3_2g0q4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gcqtm"]
+atlas = ExtResource("2_diw1u")
+region = Rect2(0, 384, 75, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fv4ek"]
+atlas = ExtResource("2_diw1u")
+region = Rect2(0, 448, 75, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7qq0c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gcqtm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fv4ek")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bklgb"]
+radius = 21.0
+height = 56.0
+
+[node name="EnemyThree" type="Area2D" groups=["enemies", "must_delete"]]
+scale = Vector2(3, 3)
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_abrsf")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_7qq0c")
+autoplay = "default"
+frame_progress = 0.461968
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(9, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_bklgb")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(39, 0)
+scale = Vector2(0.2, 0.9)
+
+[node name="Muzzle" type="Marker2D" parent="."]
+
+[node name="HurtSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_2g0q4")
+bus = &"SoundFX"
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

@@ -1,0 +1,85 @@
+[gd_scene load_steps=4 format=3 uid="uid://bc31ywjrgnfdv"]
+
+[ext_resource type="FontFile" uid="uid://c0x5hrl2ups2v" path="res://assets/fonts/nokiafc22.ttf" id="1_fhm6f"]
+[ext_resource type="Texture2D" uid="uid://byw0651f5hjyb" path="res://assets/icons/close_button.png" id="2_o00x0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rrhxf"]
+bg_color = Color(0.607843, 0.780392, 0, 1)
+border_width_left = 15
+border_width_top = 15
+border_width_right = 15
+border_width_bottom = 15
+border_color = Color(0.101961, 0.0980392, 0.0784314, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[node name="ThankYou" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -465.5
+offset_top = -273.0
+offset_right = 465.5
+offset_bottom = 273.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rrhxf")
+metadata/_edit_lock_ = true
+
+[node name="Label" type="RichTextLabel" parent="Panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 6.5
+offset_top = 15.0
+offset_right = 6.5
+offset_bottom = 146.0
+grow_horizontal = 2
+theme_override_colors/default_color = Color(0.101961, 0.0980392, 0.0784314, 1)
+theme_override_fonts/normal_font = ExtResource("1_fhm6f")
+theme_override_font_sizes/normal_font_size = 85
+bbcode_enabled = true
+text = "[center][u]Thank You!"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 120.5
+offset_top = 150.0
+offset_right = -125.5
+offset_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0.101961, 0.0980392, 0.0784314, 1)
+theme_override_fonts/normal_font = ExtResource("1_fhm6f")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "[center]You took five minutes to play this game. It means a lot to me. You can still play if you want, but there is nothing new. You can still try to beat your previous score. Thank you again."
+
+[node name="Control" type="Control" parent="Panel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="CloseMesseage" type="TouchScreenButton" parent="Panel/Control"]
+position = Vector2(-55.5, -17)
+texture_normal = ExtResource("2_o00x0")

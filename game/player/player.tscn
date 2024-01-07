@@ -1,0 +1,66 @@
+[gd_scene load_steps=7 format=3 uid="uid://bxl6cbs0bsyab"]
+
+[ext_resource type="Script" path="res://game/player/player.gd" id="1_s2qr1"]
+[ext_resource type="Texture2D" uid="uid://dk71pr67nwhwf" path="res://assets/sprites/sprite_sheet.png" id="2_7847s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_msa7h"]
+atlas = ExtResource("2_7847s")
+region = Rect2(180, 375, 90, 75)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oknx0"]
+atlas = ExtResource("2_7847s")
+region = Rect2(270, 375, 90, 75)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_02uo3"]
+atlas = ExtResource("2_7847s")
+region = Rect2(360, 375, 90, 75)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n827x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_msa7h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oknx0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_02uo3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Player" type="Area2D" groups=["player"]]
+scale = Vector2(3, 3)
+collision_mask = 10
+script = ExtResource("1_s2qr1")
+metadata/_edit_group_ = true
+
+[node name="Ship" type="Sprite2D" parent="."]
+position = Vector2(0, -2)
+texture = ExtResource("2_7847s")
+region_enabled = true
+region_rect = Rect2(448, 448, 64, 64)
+
+[node name="Collision" type="CollisionPolygon2D" parent="."]
+visible = false
+position = Vector2(0, -1)
+polygon = PackedVector2Array(-18, -14, 12, -14, 12, -8, 18, -8, 18, -2, 30, -2, 30, 4, 18, 4, 18, 10, 12, 10, 12, 16, -18, 16, -18, 22, -30, 22, -30, -20, -18, -20)
+
+[node name="Muzzle" type="Marker2D" parent="."]
+position = Vector2(37, 0)
+
+[node name="Shield" type="AnimatedSprite2D" parent="."]
+position = Vector2(-4.33333, -3.33333)
+sprite_frames = SubResource("SpriteFrames_n827x")
+autoplay = "default"
+frame_progress = 0.325513
+
+[node name="InvincibilityTimer" type="Timer" parent="Shield"]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="Shield/InvincibilityTimer" to="." method="_on_invincibility_timer_timeout"]

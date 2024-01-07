@@ -1,0 +1,63 @@
+[gd_scene load_steps=7 format=3 uid="uid://bo5n0g02y13fx"]
+
+[ext_resource type="Texture2D" uid="uid://dk71pr67nwhwf" path="res://assets/sprites/sprite_sheet.png" id="1_w5yhr"]
+[ext_resource type="Script" path="res://game/enemies/enemies/enemy_two/enemy_two.gd" id="1_xy571"]
+[ext_resource type="AudioStream" uid="uid://7yihr3umpbtc" path="res://assets/sounds/hitHurt.wav" id="3_mgt3n"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_10hnv"]
+atlas = ExtResource("1_w5yhr")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bw5rt"]
+atlas = ExtResource("1_w5yhr")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4d8vs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_10hnv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bw5rt")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="EnemyTwo" type="Area2D" groups=["enemies", "must_delete"]]
+scale = Vector2(3, 3)
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_xy571")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -1.01328e-05)
+sprite_frames = SubResource("SpriteFrames_4d8vs")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
+visible = false
+position = Vector2(0, -9)
+polygon = PackedVector2Array(-18, 6, -18, 12, -12, 12, -12, 18, 0, 18, 0, 24, 6, 24, 6, 30, 12, 30, 18, 24, 18, -6, 12, -12, 6, -12, 6, -6, 0, -6, 0, 0, -12, 0, -12, 6)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(19, -1.00001)
+scale = Vector2(0.183334, 1)
+
+[node name="DedectArea" type="Area2D" parent="."]
+position = Vector2(-10.6667, -0.666677)
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="DedectArea"]
+position = Vector2(-94.6667, 7.33334)
+polygon = PackedVector2Array(92.3333, -21.3333, 92.3333, 6.33334, -99, 155, -100.333, -180)
+
+[node name="HurtSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_mgt3n")
+bus = &"SoundFX"
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="area_entered" from="DedectArea" to="." method="_on_dedect_area_area_entered"]

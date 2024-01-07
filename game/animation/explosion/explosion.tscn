@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=3 uid="uid://c52jev0jsanjg"]
+
+[ext_resource type="Texture2D" uid="uid://dk71pr67nwhwf" path="res://assets/sprites/sprite_sheet.png" id="1_vmx7s"]
+[ext_resource type="Script" path="res://game/animation/explosion/explosion.gd" id="2_d3n5q"]
+[ext_resource type="AudioStream" uid="uid://cyufeyjvmoomp" path="res://assets/sounds/explosion.wav" id="3_jd1ui"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_de1v4"]
+atlas = ExtResource("1_vmx7s")
+region = Rect2(192, 448, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ogubl"]
+atlas = ExtResource("1_vmx7s")
+region = Rect2(256, 448, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rcl5l"]
+atlas = ExtResource("1_vmx7s")
+region = Rect2(320, 448, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6gmv2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_de1v4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ogubl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rcl5l")
+}],
+"loop": false,
+"name": &"explode",
+"speed": 5.0
+}]
+
+[node name="Explosion" type="AnimatedSprite2D"]
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_6gmv2")
+animation = &"explode"
+autoplay = "explode"
+script = ExtResource("2_d3n5q")
+
+[node name="SoundEffect" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_jd1ui")
+bus = &"SoundFX"
+
+[connection signal="animation_finished" from="." to="." method="_on_animation_finished"]

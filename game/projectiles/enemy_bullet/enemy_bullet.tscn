@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://ja6wxij4n7bc"]
+
+[ext_resource type="Script" path="res://game/projectiles/enemy_bullet/enemy_bullet.gd" id="1_0wbit"]
+[ext_resource type="Texture2D" uid="uid://dk71pr67nwhwf" path="res://assets/sprites/sprite_sheet.png" id="1_8av48"]
+[ext_resource type="AudioStream" uid="uid://c1rskyxm5gm3l" path="res://assets/sounds/laser_shoot.wav" id="3_anyyg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nc0k2"]
+size = Vector2(12, 6)
+
+[node name="EnemyBullet" type="Area2D" groups=["enemy_projectiles", "must_delete"]]
+scale = Vector2(3, 3)
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_0wbit")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_8av48")
+region_enabled = true
+region_rect = Rect2(408, 492, 12, 6)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_nc0k2")
+
+[node name="Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_anyyg")
+bus = &"SoundFX"
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

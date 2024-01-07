@@ -1,0 +1,389 @@
+[gd_scene load_steps=26 format=3 uid="uid://btpitag6wclay"]
+
+[ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://GUI/in_game/joystick/virtual_joystick.tscn" id="1_6ae34"]
+[ext_resource type="Script" path="res://game/gameplay/gameplay.gd" id="1_nk2bl"]
+[ext_resource type="PackedScene" uid="uid://bxl6cbs0bsyab" path="res://game/player/player.tscn" id="1_wwo7i"]
+[ext_resource type="PackedScene" uid="uid://bk76crjn0pjdu" path="res://GUI/in_game/shoot_buttons/shoot_control.tscn" id="2_ogkkp"]
+[ext_resource type="Texture2D" uid="uid://b11ceba1mnqvd" path="res://assets/sprites/1A1914.png" id="3_8aued"]
+[ext_resource type="PackedScene" uid="uid://bo5n0g02y13fx" path="res://game/enemies/enemies/enemy_two/enemy_two.tscn" id="3_23217"]
+[ext_resource type="PackedScene" uid="uid://c07ehtvdfvfg5" path="res://game/enemies/enemies/enemy_one/enemy_one.tscn" id="4_dhiax"]
+[ext_resource type="PackedScene" uid="uid://d2hh3hpcmhfwf" path="res://game/enemies/enemies/enemy_three/enemy_three.tscn" id="4_tveu1"]
+[ext_resource type="PackedScene" uid="uid://kfoh5gy23gpo" path="res://HUD/score_counter/counter.tscn" id="5_34vmw"]
+[ext_resource type="Script" path="res://GUI/pause_screen/pause_screen.gd" id="5_mwcmd"]
+[ext_resource type="FontFile" uid="uid://c0x5hrl2ups2v" path="res://assets/fonts/nokiafc22.ttf" id="6_15joo"]
+[ext_resource type="PackedScene" uid="uid://c2bber87bgiba" path="res://HUD/life_system/heart_container.tscn" id="7_tktsh"]
+[ext_resource type="PackedScene" uid="uid://bsdwhajbpw4o0" path="res://GUI/game_over_screen/game_over_screen.tscn" id="7_v76ip"]
+[ext_resource type="AudioStream" uid="uid://brhfiw7446vu0" path="res://assets/sounds/483502__dominikbraun__let-me-see-ya-bounce-8-bit-music.mp3" id="10_335yu"]
+[ext_resource type="Theme" uid="uid://bj4nx5vw77ok8" path="res://resources/v_hslider.tres" id="11_6jydx"]
+[ext_resource type="Texture2D" uid="uid://dqgi1gh73w1gq" path="res://assets/icons/pause_menu.png" id="11_s3xs0"]
+[ext_resource type="Texture2D" uid="uid://bn3wc7thqrf5j" path="res://assets/icons/homing_missile_icon.png" id="13_ogys6"]
+[ext_resource type="PackedScene" uid="uid://bc31ywjrgnfdv" path="res://GUI/thank_you/thanks.tscn" id="17_5i6cs"]
+[ext_resource type="PackedScene" uid="uid://dvc8q5pabwvxj" path="res://game/enemies/enemies/enemy_four/enemy_four.tscn" id="17_rqq0x"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_d8nwi"]
+font = ExtResource("6_15joo")
+font_size = 150
+font_color = Color(0.101961, 0.0980392, 0.0784314, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_166l7"]
+font = ExtResource("6_15joo")
+font_size = 50
+font_color = Color(0.101961, 0.0980392, 0.0784314, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_tu8wp"]
+font = ExtResource("6_15joo")
+font_size = 50
+font_color = Color(0.101961, 0.0980392, 0.0784314, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_hdf84"]
+font = ExtResource("6_15joo")
+font_size = 50
+font_color = Color(0.101961, 0.0980392, 0.0784314, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_m5pax"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_vwsdt"]
+font = ExtResource("6_15joo")
+font_size = 60
+font_color = Color(0.101961, 0.0980392, 0.0784314, 1)
+
+[node name="Gameplay" type="Node2D"]
+script = ExtResource("1_nk2bl")
+enemies = Array[PackedScene]([ExtResource("4_dhiax"), ExtResource("3_23217")])
+special_enemies = Array[PackedScene]([ExtResource("17_rqq0x")])
+heavy_enemies = Array[PackedScene]([ExtResource("4_tveu1")])
+
+[node name="Buttons" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="PauseButton" type="TouchScreenButton" parent="Buttons"]
+position = Vector2(800, 10)
+scale = Vector2(0.8, 0.8)
+texture_normal = ExtResource("11_s3xs0")
+passby_press = true
+
+[node name="ShootingButtons" parent="Buttons" instance=ExtResource("2_ogkkp")]
+anchors_preset = -1
+anchor_left = 0.814
+anchor_top = 0.609
+anchor_right = 0.966
+anchor_bottom = 0.949
+offset_left = -5.52002
+offset_top = -11.2
+offset_right = -260.88
+offset_bottom = -283.2
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="UI" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="PauseScreen" type="CanvasLayer" parent="UI"]
+visible = false
+script = ExtResource("5_mwcmd")
+
+[node name="ColorRect" type="ColorRect" parent="UI/PauseScreen"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.607843, 0.780392, 0, 0.784314)
+
+[node name="PAUSED!!" type="Label" parent="UI/PauseScreen"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -250.5
+offset_top = 145.0
+offset_right = 263.5
+offset_bottom = 273.0
+grow_horizontal = 2
+text = "PAUSED!!"
+label_settings = SubResource("LabelSettings_d8nwi")
+horizontal_alignment = 1
+
+[node name="Border" type="Sprite2D" parent="UI/PauseScreen/PAUSED!!"]
+position = Vector2(381.5, 173)
+scale = Vector2(15.6094, 0.15625)
+texture = ExtResource("3_8aued")
+
+[node name="HighScore" type="Label" parent="UI/PauseScreen"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -339.0
+offset_top = -65.0
+offset_right = 346.0
+offset_bottom = 1.00003
+grow_horizontal = 2
+grow_vertical = 2
+text = "High Score"
+label_settings = SubResource("LabelSettings_166l7")
+
+[node name="VBox" type="VBoxContainer" parent="UI/PauseScreen"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -441.0
+offset_top = -264.0
+offset_right = 463.0
+offset_bottom = -31.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 10
+metadata/_edit_group_ = true
+
+[node name="MainMenuButon" type="Button" parent="UI/PauseScreen/VBox"]
+layout_mode = 2
+size_flags_horizontal = 6
+focus_mode = 0
+theme_override_colors/font_color = Color(0.101961, 0.0980392, 0.0784314, 1)
+theme_override_colors/font_pressed_color = Color(0.101961, 0.0980392, 0.0784314, 1)
+theme_override_colors/font_hover_color = Color(0.101961, 0.0980392, 0.0784314, 1)
+theme_override_fonts/font = ExtResource("6_15joo")
+theme_override_font_sizes/font_size = 50
+text = "Main Menu"
+flat = true
+
+[node name="RestartButton" type="Button" parent="UI/PauseScreen/VBox"]
+layout_mode = 2
+focus_mode = 0
+theme_override_colors/font_color = Color(0.101961, 0.0980392, 0.0784314, 1)
+theme_override_colors/font_pressed_color = Color(0.101961, 0.0980392, 0.0784314, 1)
+theme_override_colors/font_hover_color = Color(0.101961, 0.0980392, 0.0784314, 1)
+theme_override_fonts/font = ExtResource("6_15joo")
+theme_override_font_sizes/font_size = 50
+text = "Restart"
+flat = true
+
+[node name="QuitButton" type="Button" parent="UI/PauseScreen/VBox"]
+layout_mode = 2
+focus_mode = 0
+theme_override_colors/font_color = Color(0.101961, 0.0980392, 0.0784314, 1)
+theme_override_colors/font_pressed_color = Color(0.101961, 0.0980392, 0.0784314, 1)
+theme_override_colors/font_hover_color = Color(0.101961, 0.0980392, 0.0784314, 1)
+theme_override_fonts/font = ExtResource("6_15joo")
+theme_override_font_sizes/font_size = 50
+text = "Quit"
+flat = true
+
+[node name="Music" type="VSlider" parent="UI/PauseScreen"]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -590.0
+offset_top = -200.0
+offset_right = -570.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("11_6jydx")
+max_value = 1.0
+step = 0.001
+
+[node name="Label" type="Label" parent="UI/PauseScreen/Music"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -85.0
+offset_top = -10.0
+offset_right = 84.0
+offset_bottom = 53.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Music
+"
+label_settings = SubResource("LabelSettings_tu8wp")
+
+[node name="Sfx" type="VSlider" parent="UI/PauseScreen"]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 590.0
+offset_top = -200.0
+offset_right = 610.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("11_6jydx")
+max_value = 1.0
+step = 0.001
+
+[node name="Label" type="Label" parent="UI/PauseScreen/Sfx"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -3.0
+offset_right = 34.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Sfx
+"
+label_settings = SubResource("LabelSettings_hdf84")
+
+[node name="Bg" type="ColorRect" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.607843, 0.780392, 0, 1)
+metadata/_edit_lock_ = true
+
+[node name="border" type="Sprite2D" parent="UI/Bg"]
+position = Vector2(841.208, 124.9)
+scale = Vector2(26.3998, 0.096875)
+texture = ExtResource("3_8aued")
+
+[node name="ScoreCounter" parent="UI" instance=ExtResource("5_34vmw")]
+anchors_preset = 10
+anchor_bottom = 0.0
+offset_left = 2.0
+offset_right = 9.0
+grow_vertical = 1
+
+[node name="VirtualJoystick" parent="UI" instance=ExtResource("1_6ae34")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -840.0
+offset_top = -400.0
+offset_right = -50.0
+offset_bottom = 400.0
+joystick_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="Base" parent="UI/VirtualJoystick" index="0"]
+visible = false
+offset_left = -271.0
+offset_top = 86.0
+offset_right = -71.0
+offset_bottom = 286.0
+scale = Vector2(1.5, 1.5)
+
+[node name="HeartContainer" parent="UI" instance=ExtResource("7_tktsh")]
+offset_right = 63.0
+offset_bottom = 65.0
+
+[node name="HomingMissileCounter" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Panel" type="Panel" parent="UI/HomingMissileCounter"]
+layout_mode = 0
+offset_left = 934.0
+offset_top = -34.0
+offset_right = 1229.0
+offset_bottom = 177.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_m5pax")
+
+[node name="Sprite2D" type="TextureRect" parent="UI/HomingMissileCounter/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_ogys6")
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="UI/HomingMissileCounter/Panel"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -122.0
+offset_top = -35.5
+offset_right = -31.0
+offset_bottom = 42.5
+grow_horizontal = 0
+grow_vertical = 2
+text = ": 3"
+label_settings = SubResource("LabelSettings_vwsdt")
+
+[node name="GameOverScreen" parent="UI" instance=ExtResource("7_v76ip")]
+visible = false
+
+[node name="ThankYou" parent="UI" instance=ExtResource("17_5i6cs")]
+visible = false
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="EnemySpawnTimer" type="Timer" parent="Timers"]
+wait_time = 3.0
+autostart = true
+
+[node name="BoostSpawnTimer" type="Timer" parent="Timers"]
+wait_time = 30.0
+autostart = true
+
+[node name="SpecialEnemSpawnTimer" type="Timer" parent="Timers"]
+wait_time = 20.0
+autostart = true
+
+[node name="HeavyEnemySpawnTimer" type="Timer" parent="Timers"]
+wait_time = 15.0
+autostart = true
+
+[node name="BossSpawn" type="Timer" parent="Timers"]
+wait_time = 300.0
+one_shot = true
+autostart = true
+
+[node name="SpecialEnemySpawner" type="Node" parent="."]
+
+[node name="Pos1" type="Marker2D" parent="SpecialEnemySpawner"]
+position = Vector2(1442, 800)
+
+[node name="Pos2" type="Marker2D" parent="SpecialEnemySpawner"]
+position = Vector2(1675, 800)
+
+[node name="Pos3" type="Marker2D" parent="SpecialEnemySpawner"]
+position = Vector2(1200, 800)
+
+[node name="Player" parent="." instance=ExtResource("1_wwo7i")]
+position = Vector2(178, 416)
+
+[node name="MainTheme" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_335yu")
+bus = &"music"
+
+[connection signal="pressed" from="Buttons/PauseButton" to="." method="_on_pause_button_pressed"]
+[connection signal="shoot_pressed" from="Buttons/ShootingButtons" to="Player" method="_on_shoot_control_shoot_pressed"]
+[connection signal="pressed" from="UI/PauseScreen/VBox/MainMenuButon" to="UI/PauseScreen" method="_on_main_menu_buton_pressed"]
+[connection signal="pressed" from="UI/PauseScreen/VBox/RestartButton" to="UI/PauseScreen" method="_on_restart_button_pressed"]
+[connection signal="pressed" from="UI/PauseScreen/VBox/QuitButton" to="UI/PauseScreen" method="_on_quit_button_pressed"]
+[connection signal="value_changed" from="UI/PauseScreen/Music" to="." method="_on_music_value_changed"]
+[connection signal="value_changed" from="UI/PauseScreen/Sfx" to="." method="_on_sfx_value_changed"]
+[connection signal="pressed" from="UI/ThankYou/Panel/Control/CloseMesseage" to="." method="_on_close_messeage_pressed"]
+[connection signal="timeout" from="Timers/EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
+[connection signal="timeout" from="Timers/BoostSpawnTimer" to="." method="_on_boost_spawn_timer_timeout"]
+[connection signal="timeout" from="Timers/SpecialEnemSpawnTimer" to="." method="_on_special_enem_spawn_timer_timeout"]
+[connection signal="timeout" from="Timers/HeavyEnemySpawnTimer" to="." method="_on_heavy_enemy_spawn_timer_timeout"]
+[connection signal="timeout" from="Timers/BossSpawn" to="." method="_on_boss_spawn_timeout"]
+
+[editable path="UI/VirtualJoystick"]
+[editable path="UI/ThankYou"]

@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://c4xp8tsfk3fqm"]
+
+[ext_resource type="Script" path="res://game/boost/boost.gd" id="1_6r0uq"]
+[ext_resource type="Texture2D" uid="uid://due3oeuftky7w" path="res://assets/icons/icon_monochrome_light.png" id="2_s55s7"]
+[ext_resource type="AudioStream" uid="uid://c5atpm4yrqgi8" path="res://assets/sounds/boost_sound.wav" id="3_dv6fk"]
+[ext_resource type="AudioStream" uid="uid://dp11npqv5lckb" path="res://assets/sounds/powerUp.wav" id="4_tfjb5"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lc0rn"]
+radius = 19.5
+height = 42.0
+
+[node name="Boost" type="Area2D" groups=["must_delete"]]
+position = Vector2(1280, 378)
+scale = Vector2(2, 2)
+script = ExtResource("1_6r0uq")
+metadata/_edit_group_ = true
+
+[node name="Icon" type="Sprite2D" parent="."]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_s55s7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, -3)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_lc0rn")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+visible = false
+position = Vector2(32.25, 1)
+scale = Vector2(0.224998, 2.6)
+
+[node name="sounds" type="Node" parent="."]
+
+[node name="idle" type="AudioStreamPlayer" parent="sounds"]
+stream = ExtResource("3_dv6fk")
+autoplay = true
+bus = &"SoundFX"
+
+[node name="collide" type="AudioStreamPlayer" parent="sounds"]
+stream = ExtResource("4_tfjb5")
+bus = &"SoundFX"
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

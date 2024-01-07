@@ -1,0 +1,72 @@
+[gd_scene load_steps=7 format=3 uid="uid://dvc8q5pabwvxj"]
+
+[ext_resource type="Script" path="res://game/enemies/enemies/enemy_four/enemy_four.gd" id="1_foxu0"]
+[ext_resource type="Texture2D" uid="uid://bqxbgng7wvsjs" path="res://assets/sprites/enemy_four.png" id="1_hq3al"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_c0bqi"]
+radius = 11.0
+height = 54.0
+
+[sub_resource type="Animation" id="Animation_eqxxd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_kwg7f"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_47ild"]
+_data = {
+"RESET": SubResource("Animation_eqxxd"),
+"idle": SubResource("Animation_kwg7f")
+}
+
+[node name="EnemyFour" type="Area2D" groups=["enemies", "must_delete"]]
+position = Vector2(-250, -75)
+scale = Vector2(2, 2)
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_foxu0")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(-4, -1.00002)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_c0bqi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_hq3al")
+hframes = 2
+frame = 1
+region_rect = Rect2(66, 276, 54, 30)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_47ild")
+}
+autoplay = "idle"
+speed_scale = 5.0

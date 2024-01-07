@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://k20cuayrs0dt"]
+
+[ext_resource type="Texture2D" uid="uid://dk71pr67nwhwf" path="res://assets/sprites/sprite_sheet.png" id="1_mjdhf"]
+[ext_resource type="Script" path="res://game/projectiles/homing_missile/homing_missile.gd" id="1_mko1m"]
+[ext_resource type="AudioStream" uid="uid://cx8yvpisvvrx1" path="res://assets/sounds/missile.wav" id="3_k1bj1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_alyw5"]
+size = Vector2(24, 18)
+
+[node name="HomingMissile" type="Area2D" groups=["must_delete", "player_projectiles"]]
+position = Vector2(1257, 329)
+scale = Vector2(3, 3)
+collision_layer = 4
+collision_mask = 10
+script = ExtResource("1_mko1m")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_mjdhf")
+region_enabled = true
+region_rect = Rect2(408, 468, 24, 18)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_alyw5")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+visible = false
+position = Vector2(0.166667, -8.04663e-07)
+scale = Vector2(1.21667, 0.9)
+
+[node name="DedectArea" type="Area2D" parent="."]
+collision_layer = 5
+collision_mask = 10
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="DedectArea"]
+position = Vector2(-0.666672, 1)
+scale = Vector2(1, 0.43455)
+polygon = PackedVector2Array(-2, -3.06833, 132, -258.505, 130, 261.573)
+one_way_collision_margin = 0.0
+
+[node name="sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_k1bj1")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="area_entered" from="DedectArea" to="." method="_on_dedect_area_area_entered"]

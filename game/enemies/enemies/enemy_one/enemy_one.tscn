@@ -1,0 +1,61 @@
+[gd_scene load_steps=8 format=3 uid="uid://c07ehtvdfvfg5"]
+
+[ext_resource type="Texture2D" uid="uid://dk71pr67nwhwf" path="res://assets/sprites/sprite_sheet.png" id="1_oc0qf"]
+[ext_resource type="Script" path="res://game/enemies/enemies/enemy_one/enemy_one.gd" id="1_qi0w0"]
+[ext_resource type="AudioStream" uid="uid://7yihr3umpbtc" path="res://assets/sounds/hitHurt.wav" id="3_iuuon"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sk6is"]
+atlas = ExtResource("1_oc0qf")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5qfw5"]
+atlas = ExtResource("1_oc0qf")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_83vm6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sk6is")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5qfw5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ci35h"]
+radius = 15.0
+height = 53.9999
+
+[node name="EnemyOne" type="Area2D" groups=["enemies", "must_delete"]]
+position = Vector2(1543, 424)
+scale = Vector2(3, 3)
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_qi0w0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_83vm6")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-4.33337, -0.333374)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ci35h")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." groups=["enemies"]]
+position = Vector2(35.1667, -1.19209e-07)
+scale = Vector2(0.283332, 1.73333)
+
+[node name="Muzzle" type="Marker2D" parent="."]
+position = Vector2(-39.6667, -0.333343)
+
+[node name="HurtSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_iuuon")
+bus = &"SoundFX"
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

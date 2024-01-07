@@ -1,0 +1,354 @@
+[gd_scene load_steps=15 format=3 uid="uid://1wjiw7lc1caj"]
+
+[ext_resource type="Script" path="res://GUI/main_menu/main_menu.gd" id="1_rcay1"]
+[ext_resource type="FontFile" uid="uid://c0x5hrl2ups2v" path="res://assets/fonts/nokiafc22.ttf" id="2_5flih"]
+[ext_resource type="Texture2D" uid="uid://b11ceba1mnqvd" path="res://assets/sprites/1A1914.png" id="3_07bkf"]
+[ext_resource type="AudioStream" uid="uid://brhfiw7446vu0" path="res://assets/sounds/483502__dominikbraun__let-me-see-ya-bounce-8-bit-music.mp3" id="3_ahcvh"]
+[ext_resource type="Script" path="res://GUI/main_menu/credits.gd" id="5_745aj"]
+[ext_resource type="Theme" uid="uid://bj4nx5vw77ok8" path="res://resources/v_hslider.tres" id="5_lqbmr"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_r3vbt"]
+font = ExtResource("2_5flih")
+font_size = 120
+font_color = Color(0.101961, 0.0980392, 0.0784314, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_oa4gu"]
+font = ExtResource("2_5flih")
+font_size = 75
+font_color = Color(0.101961, 0.0980392, 0.0784314, 1)
+
+[sub_resource type="ImageTexture" id="ImageTexture_vty4i"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_jqt65"]
+color = Color(0.101961, 0.0980392, 0.0784314, 1)
+thickness = 100
+vertical = true
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_i4qrf"]
+color = Color(0.101961, 0.0980392, 0.0784314, 1)
+thickness = 100
+vertical = true
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_a7plt"]
+color = Color(0.101961, 0.0980392, 0.0784314, 1)
+thickness = 100
+vertical = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gbp8u"]
+bg_color = Color(0.501961, 0.501961, 0.501961, 0)
+border_width_left = 10
+border_color = Color(0.501961, 0.501961, 0.501961, 0.266667)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="Theme" id="Theme_pgdj0"]
+VScrollBar/icons/decrement = SubResource("ImageTexture_vty4i")
+VScrollBar/icons/decrement_highlight = SubResource("ImageTexture_vty4i")
+VScrollBar/icons/decrement_pressed = SubResource("ImageTexture_vty4i")
+VScrollBar/icons/increment = SubResource("ImageTexture_vty4i")
+VScrollBar/icons/increment_highlight = SubResource("ImageTexture_vty4i")
+VScrollBar/icons/increment_pressed = SubResource("ImageTexture_vty4i")
+VScrollBar/styles/grabber = SubResource("StyleBoxLine_jqt65")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxLine_i4qrf")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxLine_a7plt")
+VScrollBar/styles/scroll = SubResource("StyleBoxFlat_gbp8u")
+
+[node name="MainMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rcay1")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.607843, 0.780392, 0, 1)
+
+[node name="GameName" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -512.0
+offset_right = 512.0
+offset_bottom = 250.0
+grow_horizontal = 2
+text = "Space Project"
+label_settings = SubResource("LabelSettings_r3vbt")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Border" type="Sprite2D" parent="GameName"]
+position = Vector2(497, 205)
+scale = Vector2(14, 0.14)
+texture = ExtResource("3_07bkf")
+
+[node name="Main" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="VBoxContainer" parent="Main"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -128.0
+offset_right = 206.0
+offset_bottom = 316.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_group_ = true
+
+[node name="PlayButton" type="Button" parent="Main/Panel"]
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 0
+theme_override_colors/font_color = Color(0.101961, 0.0980392, 0.0784314, 1)
+theme_override_colors/font_pressed_color = Color(0.101961, 0.0980392, 0.0784314, 1)
+theme_override_colors/font_hover_color = Color(0.101961, 0.0980392, 0.0784314, 1)
+theme_override_colors/font_focus_color = Color(0.101961, 0.0980392, 0.0784314, 1)
+theme_override_fonts/font = ExtResource("2_5flih")
+theme_override_font_sizes/font_size = 80
+text = "Play"
+flat = true
+
+[node name="CreditsButton" type="Button" parent="Main/Panel"]
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 0
+theme_override_colors/font_color = Color(0.101961, 0.0980392, 0.0784314, 1)
+theme_override_colors/font_pressed_color = Color(0.101961, 0.0980392, 0.0784314, 1)
+theme_override_colors/font_hover_color = Color(0.101961, 0.0980392, 0.0784314, 1)
+theme_override_fonts/font = ExtResource("2_5flih")
+theme_override_font_sizes/font_size = 80
+text = "Credits
+"
+flat = true
+
+[node name="SettingsButton" type="Button" parent="Main/Panel"]
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 0
+theme_override_colors/font_color = Color(0.101961, 0.0980392, 0.0784314, 1)
+theme_override_colors/font_pressed_color = Color(0.101961, 0.0980392, 0.0784314, 1)
+theme_override_colors/font_hover_color = Color(0.101961, 0.0980392, 0.0784314, 1)
+theme_override_fonts/font = ExtResource("2_5flih")
+theme_override_font_sizes/font_size = 80
+text = "Settings
+"
+flat = true
+
+[node name="ExitButton" type="Button" parent="Main/Panel"]
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 0
+theme_override_colors/font_color = Color(0.101961, 0.0980392, 0.0784314, 1)
+theme_override_colors/font_pressed_color = Color(0.101961, 0.0980392, 0.0784314, 1)
+theme_override_colors/font_hover_color = Color(0.101961, 0.0980392, 0.0784314, 1)
+theme_override_fonts/font = ExtResource("2_5flih")
+theme_override_font_sizes/font_size = 80
+text = "Exit
+"
+flat = true
+
+[node name="signature" type="RichTextLabel" parent="Main"]
+layout_mode = 2
+offset_left = 1330.0
+offset_top = 689.0
+offset_right = 1682.0
+offset_bottom = 799.0
+theme_override_colors/default_color = Color(0.101961, 0.0980392, 0.0784314, 1)
+theme_override_fonts/normal_font = ExtResource("2_5flih")
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[center]Re-made by sELO
+with
+Godot Game Engine"
+fit_content = true
+
+[node name="Settings" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="music" type="AudioStreamPlayer" parent="Settings"]
+stream = ExtResource("3_ahcvh")
+bus = &"music"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Settings"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -112.0
+offset_right = 400.0
+offset_bottom = 112.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Labels" type="VBoxContainer" parent="Settings/HBoxContainer"]
+layout_mode = 2
+
+[node name="Music" type="Label" parent="Settings/HBoxContainer/Labels"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Music
+"
+label_settings = SubResource("LabelSettings_oa4gu")
+horizontal_alignment = 2
+
+[node name="SoundFX" type="Label" parent="Settings/HBoxContainer/Labels"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Sfx"
+label_settings = SubResource("LabelSettings_oa4gu")
+horizontal_alignment = 2
+
+[node name="Sliders" type="VBoxContainer" parent="Settings/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Music" type="HSlider" parent="Settings/HBoxContainer/Sliders"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("5_lqbmr")
+max_value = 1.0
+step = 0.001
+
+[node name="SoundFX" type="HSlider" parent="Settings/HBoxContainer/Sliders"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("5_lqbmr")
+max_value = 1.0
+step = 0.001
+
+[node name="BackFromSettings" type="Button" parent="Settings"]
+layout_mode = 2
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -240.0
+offset_top = 28.0
+offset_right = -44.0
+offset_bottom = 118.0
+grow_horizontal = 0
+size_flags_horizontal = 4
+focus_mode = 0
+theme_override_colors/font_color = Color(0.101961, 0.0980392, 0.0784314, 1)
+theme_override_colors/font_pressed_color = Color(0.101961, 0.0980392, 0.0784314, 1)
+theme_override_colors/font_hover_color = Color(0.101961, 0.0980392, 0.0784314, 1)
+theme_override_fonts/font = ExtResource("2_5flih")
+theme_override_font_sizes/font_size = 65
+text = "Back
+"
+flat = true
+
+[node name="Credits" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Credits"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -488.0
+offset_top = -140.0
+offset_right = 499.0
+offset_bottom = 370.0
+grow_horizontal = 2
+grow_vertical = 2
+auto_translate = false
+localize_numeral_system = false
+theme = SubResource("Theme_pgdj0")
+theme_override_colors/default_color = Color(0.101961, 0.0980392, 0.0784314, 1)
+theme_override_fonts/normal_font = ExtResource("2_5flih")
+theme_override_fonts/bold_font = ExtResource("2_5flih")
+theme_override_fonts/italics_font = ExtResource("2_5flih")
+theme_override_font_sizes/normal_font_size = 60
+theme_override_font_sizes/bold_font_size = 70
+theme_override_font_sizes/italics_font_size = 75
+bbcode_enabled = true
+text = "[center]This game is not a 100% copy of the original. [p][center]I didn't add most enemies and bosses, and I didn't use the exact game sounds. Please enjoy!
+
+[font_size=75]Re-made by sELO with Godot Game Engine.[/font_size]
+
+Thanks to [b]NOKIA CORPORATION[/b] for making this game back in the day. 
+
+[u][font_size=70]Images[/font_size][/u]
+
+Nokia Corporation
+
+[u][font_size=70] Sounds [/font_size][/u]
+
+Sound effects by: [url=https://sfxr.me/] sfxr.me [/url]
+
+Music by:
+ [url=https://freesound.org/people/DominikBraun/sounds/483502/] DominikBraun [/url]"
+context_menu_enabled = true
+script = ExtResource("5_745aj")
+
+[node name="BackFromCredits" type="Button" parent="Credits"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -240.0
+offset_top = 28.0
+offset_right = -44.0
+offset_bottom = 118.0
+grow_horizontal = 0
+size_flags_horizontal = 4
+focus_mode = 0
+theme_override_colors/font_color = Color(0.101961, 0.0980392, 0.0784314, 1)
+theme_override_colors/font_pressed_color = Color(0.101961, 0.0980392, 0.0784314, 1)
+theme_override_colors/font_hover_color = Color(0.101961, 0.0980392, 0.0784314, 1)
+theme_override_fonts/font = ExtResource("2_5flih")
+theme_override_font_sizes/font_size = 65
+text = "Back
+"
+flat = true
+
+[connection signal="pressed" from="Main/Panel/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="Main/Panel/CreditsButton" to="." method="_on_credits_button_pressed"]
+[connection signal="pressed" from="Main/Panel/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="Main/Panel/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="value_changed" from="Settings/HBoxContainer/Sliders/Music" to="." method="_on_music_value_changed"]
+[connection signal="value_changed" from="Settings/HBoxContainer/Sliders/SoundFX" to="." method="_on_sfx_value_changed"]
+[connection signal="pressed" from="Settings/BackFromSettings" to="." method="_on_back_from_settings_pressed"]
+[connection signal="meta_clicked" from="Credits/RichTextLabel" to="Credits/RichTextLabel" method="_on_meta_clicked"]
+[connection signal="pressed" from="Credits/BackFromCredits" to="." method="_on_back_from_credits_pressed"]
